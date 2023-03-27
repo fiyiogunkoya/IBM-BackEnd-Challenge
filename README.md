@@ -12,6 +12,8 @@ MongoDB was used due to it's ease of use for a no-SQL database and easy integrat
 
 `pokemon.json` contains the initial data that will be imported into the database
 
+`/models/` contains the schemas for both collections. In this folder we have `Pokemon.js` that contains the schema and model for the Pokemon collection and the `Favorites.js` contains the schema and model for the Pokemon_Favorites collection
+
 
 
 # HOW TO RUN THE CODE(END-TO-END)
@@ -27,6 +29,14 @@ Let's take a quick example:
 localhost:5000 is where the server is running and where we will add our API requests to our local database.
   
 1) Get Pokemon by id:
-I used the /id endpoint and you will complete the url with your desired id as a parameter into this get request.
+I used the `/id` endpoint and you will complete the url with your desired id as a parameter into this get request.
 Full URL will look like this: `localhost:5000/id?id=<DESIRED_ID_NUMBER>` where `<DESIRED_ID_NUMBER>` will be replaced by a valid ID number.
+
+
+2) Get Pokemon by name:
+I used the `/name` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/name?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name.
+
+
+
   
