@@ -37,6 +37,28 @@ Full URL will look like this: `localhost:5000/id?id=<DESIRED_ID_NUMBER>` where `
 I used the `/name` endpoint and you will complete the url with your desired id as a parameter into this get request.
 Full URL will look like this: `localhost:5000/name?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name.
 
+3) Get Pokemon types:
+I used the `/types` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/name?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name and it will return the types of said pokemon.
+
+4) List Pokemons:
+I used the `/page` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/page?page=<PAGE>&limit=<LIMIT>` where `<PAGE>` will be replaced by a page number and `<LIMIT>` will be replaced by the maximum number of pokemons you wish to display for that page.
+
+5) Add Fave Pokemon:
+I used the `/add` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/add?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name.
+
+6) Get Pokemon Faves:
+I used the `/Faves` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/faves`.
+
+7) Remove Fave Pokemon:
+I used the `/remove` endpoint and you will complete the url with your desired id as a parameter into this get request.
+Full URL will look like this: `localhost:5000/remove?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name.
+
+
+
 
 
   
