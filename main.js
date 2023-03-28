@@ -14,37 +14,33 @@ app.use(cors())
 
 
 async function main() {
-    // const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://fiyignk:Fiyi@cluster0.6bulr9j.mongodb.net/Pokemon?retryWrites=true&w=majority";
+//url for mongodb database
 const uri = "mongodb://127.0.0.1:27017"
 mongoose.connect(uri).then(() => console.log('db connected'))
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`listening to port ${port}`))
-// const client = new MongoClient(uri, { useNewUrlParser: true });
 const data = JSON.parse(fs.readFileSync('./pokemons.json', 'utf-8'))
 
 
-// import data to MongoDB and create Favorites collection
+// import data to MongoDB and create Favorites collection(uncomment next line to create both data collections)
   
   // importData(data)
   getPokemonbyID()
   getPokemonbyName()
-  // const category = 'maxCP'
   // getPokemonbyFilters(category,'1000')
-  getPokemonTypes()
-  getPokemonPages()
-  AddFavePokemon()
-  getFavePokemons()
-  RemoveFavePokemon()
+  // getPokemonTypes()
+  // getPokemonPages()
+  // AddFavePokemon()
+  // getFavePokemons()
+  // RemoveFavePokemon()
   
   }
 
   const importData = async (data) => {
     try {
-    //   Pokemons.createCollection().then(function (pokemons) {
-    //     console.log('Pokemon Collection is created!');
-    // });
-    // console.log(data)
+      Pokemons.createCollection().then(function (pokemons) {
+        console.log('Pokemon Collection is created!');
+    });
       await Pokemons.create(data)
       console.log('data successfully imported')
       Pokemon_Faves.createCollection().then(function (fave_collection) {
@@ -63,7 +59,6 @@ async function getPokemonbyID() {
     const query = req.query;
 
     Pokemons.findOne({'id':query["id"]}).then((pokemon) => {
-      //if succeded do this block of code
       if (pokemon != null){
         res.send({
           ID: pokemon,
@@ -88,7 +83,6 @@ async function getPokemonbyName(Name) {
     const query = req.query;
 
     Pokemons.findOne({'name':query["name"]}).then((pokemon) => {
-      //if succeded do this block of code
       res.send({
         ID: pokemon,
       })
@@ -104,10 +98,7 @@ async function getPokemonbyName(Name) {
 
 async function getPokemonbyFilters(category,Filter) {
 
-    const cat = category;
-
     Pokemons.find({'maxCP': { $gt: Filter } ,'maxHP': {$gt: '3000'}}).then((pokemons) => {
-        //if succeded do this block of code
         app.get('/Filters', (req, res) => {
             res.send({
                 ID: pokemons,
@@ -124,8 +115,6 @@ async function getPokemonbyFilters(category,Filter) {
 
 async function getPokemonPages() {
 
-    
-        //if succeded do this block of code
         app.get('/page', (req, res) => {
           const query = req.query
           Pokemons.paginate({}, { page: query["page"], limit: query["limit"] }).then(function(pokemons) {
@@ -141,16 +130,13 @@ async function getPokemonPages() {
         }
 
 async function getPokemonTypes() {
-        //if succeded do this block of code
         app.get('/types', (req, res) => {
           const query = req.query
           Pokemons.findOne({'name':query["name"]}).then((pokemon) => {
-      //if succeded do this block of code
       res.send({
         ID: pokemon["types"],
       })
     }).catch((err) => {
-      //catch error
       console.log(err)
     });
     
@@ -162,14 +148,11 @@ async function getPokemonTypes() {
 async function getFavePokemons() {
 
   Pokemon_Faves.find({}).then(function(faves){
-    var dict = []; // create an empty array
-    // db.things.find({ words: { $in: ["text", "here"] }});
+    var dict = [];
 
     for (let i = 0; i < faves.length; i++) {
-      console.log(faves[i]);
       dict.push(faves[i]["favorites"]);
     }
-    console.log(dict)
     Pokemons.find({ name: { $in: dict}}).then((pokemon) => {
         //if succeded do this block of code
         console.log(dict,pokemon)
@@ -180,7 +163,7 @@ async function getFavePokemons() {
           })
         }).catch((err) => {
         //catch error
-        console.log("This ERROR!!")
+        console.log("Unable to get Fave Pokemon")
         });
       
   })
@@ -191,8 +174,7 @@ async function getFavePokemons() {
 
 async function AddFavePokemon() {
   app.get('/add', (req, res) => {
-    const query = req.query;// query = {sex:"female"}
-    console.log(query)
+    const query = req.query;
     Pokemon_Faves.create({
       favorites: query["name"]
     }).catch((err) => {
