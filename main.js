@@ -55,7 +55,7 @@ const data = JSON.parse(fs.readFileSync('./pokemons.json', 'utf-8'))
 
 async function getPokemonbyID() {
 
-  app.get('/ID', (req, res) => {
+  app.get('/id', (req, res) => {
     const query = req.query;
 
     Pokemons.findOne({'id':query["id"]}).then((pokemon) => {
@@ -99,7 +99,7 @@ async function getPokemonbyName(Name) {
 async function getPokemonbyFilters(category,Filter) {
 
     Pokemons.find({'maxCP': { $gt: Filter } ,'maxHP': {$gt: '3000'}}).then((pokemons) => {
-        app.get('/Filters', (req, res) => {
+        app.get('/filters', (req, res) => {
             res.send({
                 ID: pokemons,
             })
@@ -154,7 +154,6 @@ async function getFavePokemons() {
       dict.push(faves[i]["favorites"]);
     }
     Pokemons.find({ name: { $in: dict}}).then((pokemon) => {
-        //if succeded do this block of code
         console.log(dict,pokemon)
         app.get('/Faves', (req, res) => {
           res.send({
@@ -162,7 +161,6 @@ async function getFavePokemons() {
           })
           })
         }).catch((err) => {
-        //catch error
         console.log("Unable to get Fave Pokemon")
         });
       
