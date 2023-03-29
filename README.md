@@ -12,7 +12,9 @@ MongoDB was used due to it's ease of use for a no-SQL database and easy integrat
 
 `pokemon.json` contains the initial data that will be imported into the database
 
-`/models/` contains the schemas for both collections. In this folder we have `Pokemon.js` that contains the schema and model for the Pokemon collection and the `Favorites.js` contains the schema and model for the Pokemon_Favorites collection
+`/models/` contains the schemas for both collections. In this folder we have `Pokemon.js` that contains the schema and model for the Pokemon collection and the `Favorites.js` contains the schema and model for the Pokemon_Favorites collection.
+
+The Pokemon_Favorites collection is the table used to store the user's favorites pokemons but the pokemons are not stored in full as I felt that would be a waste of space. In this collection I only store the pokemon's name(which is a unique id) and based on the name, I will query the original pokemon table to get a list of the user's favorite pokemons
 
 
 
@@ -26,7 +28,7 @@ Once the data has been imported and the collections have been created, we can th
   
 Let's take a quick example:
   
-localhost:5000 is where the server is running and where we will add our API requests to our local database.
+`localhost:5000` is where the server is running and where we will add our API requests to our local database.
   
 1) Get Pokemon by id:
 I used the `/id` endpoint and you will complete the url with your desired id as a parameter into this get request.
@@ -56,6 +58,12 @@ Full URL will look like this: `localhost:5000/faves`.
 7) Remove Fave Pokemon:
 I used the `/remove` endpoint and you will complete the url with your desired id as a parameter into this get request.
 Full URL will look like this: `localhost:5000/remove?name=<NAME>` where `<NAME>` will be replaced by a valid pokemon Name.
+
+8) Add Pokemon Filters:
+I used the `/filters` endpoint. In the main function, I have passed in the a sample category I want to filter with and a filter criteria(these arguments can be modified based on user preference).
+
+
+You can comment out each function one by one in main in order to run them and see them work on the browser. I have extensively tested the functions and have error checks in place for edge case scenarios.
 
 
 
